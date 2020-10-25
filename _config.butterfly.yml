@@ -7,15 +7,17 @@
 #   name || link || icon
 
 menu:
-  # Home: / || fas fa-home
-  # Archives: /archives/ || fas fa-archive
-  # Tags: /tags/ || fas fa-tags
-  # Categories: /categories/ || fas fa-folder-open
-  # List||fas fa-list:
-  #   - Music || /music/ || fas fa-music
-  #   - Movie || /movies/ || fas fa-video
-  # Link: /link/ || fas fa-link
-  # About: /about/ || fas fa-heart
+  首页: / || fas fa-home
+  时间轴: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  清单|| fa fa-heartbeat: 
+    -音乐|| /music/ || fas fa-music 
+    -照片|| /Gallery/ || fas fa-images 
+    -电影|| /movies/ || fas fa-video
+  友链: /link/ || fas fa-link
+  关于: /about/ || fas fa-heart
+
 
 # Hide the child menu items in mobile sidebar
 hide_sidebar_menu_child: false
@@ -91,14 +93,14 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img:
+  img: /img/avatar.png
   effect: false
 
 # The banner image of home page
-index_img:
+index_img: https://images.anime-pictures.net/8c9/8c9ba8e2ef5366020b33788a44fba41c.jpg?if=ANIME-PICTURES.NET_-_656819-1920x1080-virtual+youtuber-hololive-kagura+mea+channel-minato+aqua-kagura+mea-vinkyfre.jpg
 
 # If the banner of page not setting, it will show the top_img
-default_top_img:
+default_top_img: https://images.anime-pictures.net/8c9/8c9ba8e2ef5366020b33788a44fba41c.jpg?if=ANIME-PICTURES.NET_-_656819-1920x1080-virtual+youtuber-hololive-kagura+mea+channel-minato+aqua-kagura+mea-vinkyfre.jpg
 
 # The banner image of archive page
 archive_img:
@@ -383,7 +385,7 @@ footer:
   owner:
     enable: true
     since: 2020
-  custom_text:
+  custom_text: 我相信所有美好的事物都会发生
   copyright: true # Copyright of theme and framework
   ICP: # Chinese ICP License
     enable: false
@@ -828,7 +830,9 @@ fragment_cache: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-  # - <link rel="stylesheet" href="/xxx.css">
+  # - <link rel="stylesheet" href="/xxx.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <script src="/live2d-widget/autoload.js"></script>
   bottom:
     # - <script src="xxxx"></script>
 
@@ -920,3 +924,6 @@ CDN:
   prismjs_autoloader: https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js
 
   artitalk: https://cdn.jsdelivr.net/npm/artitalk
+  
+  live2d:
+  enable: true

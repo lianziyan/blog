@@ -4,16 +4,16 @@
 
 # Site
 title: 白梓の窝
-subtitle: ''
+subtitle: '星星小点，月亮小片'
 description: ''
 keywords:
-author: John Doe
+author: maazs
 language: zh-CN
 timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://loli.place
+url: http://maazs.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -104,5 +104,5 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: https://github.com/lianziyan/lianziyan.github.io.git
+  repository: git@github.com:lianziyan/lianziyan.github.io.git
   branch: master
