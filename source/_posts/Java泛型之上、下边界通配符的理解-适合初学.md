@@ -1,0 +1,104 @@
+---
+title: Java泛型之上、下边界通配符的理解(适合初学)
+tags:
+  - 博客园
+categories:
+  - 博客园博文
+  - 博客美化
+top_img: 'https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile1@master/top-img/2.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile1@master/post-cover/3.png'
+abbrlink: 4ad3c53
+date: 2020-09-02 19:15:25
+---
+
+## 泛型的由来
+### 为什么需要泛型
+&emsp;&emsp;Java的数据类型一般都是在定义时就需要确定，这种强制的好处就是类型安全，不会出现像弄一个ClassCastException的数据给jvm，数据安全那么执行的class就会很稳定。但是假如说我不知道这个参数要传什么类型的，因为公司需求在变，如果写死的那就只能便以此需求就改一次，很麻烦。sun公司也注意到这个问题，这样会让代码的灵活性降低，他们就研究出了泛型。
+### 泛型初识
+&emsp;&emsp;什么是泛型，可以字面理解就是一个泛泛的类型，他是不确定的，在Java代码编译的时候用泛型是不会出错的，而在运行期时就会报错，说你这种第一是不合理的。这是为什么呢。因为为了提高灵活性，就在编译时期将条件放宽，但是泛型一定要在运行的时候告诉jvm你给我的数据到底是什么类型的，否则jvm会是懵逼的。所以泛型的好处就是将类型的灵活性提高，也只是在Java语法的基础上提高，不过泛型还是比较实用的。
+### 何时使用泛型
+&emsp;&emsp;泛型的应用场景就是应用在模型（可以理解为存储数据的盒子），我为了这个盒子适用更多的地方我就用将需要存入的数据用一个泛型表示，当然可以传入多值。如果是相同类型的对象就用一个泛型的数组比较好，学过集合的小伙伴应该都知道，没学过的那你应该补补课了。
+
+***泛型的语法***
+
+    public class A<T extends B>{
+       T t;
+    }
+
+## 泛型的缺点或者为什么需要上、下边界
+&emsp;&emsp;泛型的虽然强大，但是世界上任何东西东部是完美的。它也有缺陷。比如说我有一个盒子我想装苹果，但是我还可能想装香蕉那怎么办。那还不好说，在给一个参数不就行了，那十个呢，二十个呢。em....的确是。如果说我们想装的东西都属于一个类并且只要是这个类的子类就可以装。这个想法sun为我们想好了。那就是用上边界通配符。语法是<T entends M> T是泛型，M是T的父类。我们就定义一个水果类（Fruit），盛装就容器就是盘子（Dish），现在我们就可以装任何水果了，不错吧！
+
+***上边界Java代码***
+
+    public class Dish<T extends Fruit>{
+      private T fruitChild;
+
+      public Dish(T fruitChild){
+        this.fruitChild = fruitChild;
+      }
+    
+      public T getFruitChild(){
+        return fruitChild;
+      }
+      
+      public void setFruitChild(T f){
+        this.fruitChild = f;
+      }
+    
+      public static void main(String[] args){
+    
+        Dish dish = new Dish<apple>();
+        Apple apple = new apple(); //apple must be Fruit child;
+        dish.setFruitChild(apple);
+
+        system.out.printf(dish.getFruitChild);
+      }
+    }
+
+
+***下边界Java代码***
+
+    public class Dish<T super Apple>{
+      private T appleFather;
+    
+      public Dish(T appleFather){
+        this.appleFather = appleFather;
+      }
+
+      public T getAppleFather(){
+        return appleFather;
+      }
+  
+      public void setAppleFather(T f){
+        this.appleFather = f;
+      }
+    
+      public static void main(String[] args){
+    
+        Dish dish = new Dish<Fruit>();
+        Fruit fruit = new Fruit(); //fruit must be apple son;
+        dish.setAppleFather(fruit);
+    
+        system.out.printf(dish.getAppleFather);
+      }
+    }
+
+## 什么是上边界通配符
+&emsp;&emsp;当泛型T给定形如<T extends A> 的A类型到A类型任何子类的限制域，可以匹配任何在此限制域中的类型，此种表示叫上边界通配符。
+###上边界通配符理解
+![png](https://images2015.cnblogs.com/blog/820480/201611/820480-20161125004120143-1731938777.png)
+## 什么是下边界通配符
+&emsp;&emsp;当泛型T给定形如<T super A> 的A类型到A类型任何父类的限制域，可以匹配任何在此限制域中的类型，此种表示叫下边界通配符。
+### 下边界通配符理解
+![png](https://images2015.cnblogs.com/blog/820480/201611/820480-20161125004216471-1377946016.png)
+
+## 上下边界通配符的缺点
+&emsp;&emsp;上界<? extends T>不能往里存，只能往外取。
+###解释
+&emsp;&emsp;因为编译器只知道传入的是T的子类，但具体是哪一个编译器不知道，他只标注了一个占位符，当？传过来时，他不知道这能不能和占位符匹配，所以set不了。
+&emsp;&emsp;下界<? super T>不影响往里存，但往外取只能放在Object对象里。
+### 解释
+&emsp;&emsp;因为下边界已经限制了？的粒度，他只可能是T本身或者是T的父类。我们想想，我想要一个T，你却返回给我一个比T小的Object，这样我们就因为精度损失而拿不到想要的数据了。
+
+  >感谢各位童鞋的阅读，希望大家动一动发财的小手点一下推荐QAQ。
+

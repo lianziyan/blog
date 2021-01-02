@@ -4,18 +4,22 @@
 
 # Site
 title: 白梓の窝
-subtitle: '星星小点，月亮小片'
-description: ''
-keywords:
-author: maazs
+subtitle: 你好，陌生人！
+description: 漂冬散尽，星河长明
+keywords: 
+ 
+author: 白梓
 language: zh-CN
-timezone: ''
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://maazs.com
+url: maazs.com
 root: /
-permalink: :year/:month/:day/:title/
+permalink: posts/:abbrlink  # :year/:month/:day/:title/
+abbrlink:
+    alg: crc32   #算法： crc16(default) and crc32
+    rep: hex     #进制： dec(default) and hex
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -51,11 +55,6 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
-prismjs:
-  enable: false
-  preprocess: true
-  line_number: true
-  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -81,8 +80,8 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+## Use post's date for updated date unless set in front-matter
+use_date_for_updated: true
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -97,12 +96,91 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+#搜索服务
+# algolia:
+#   appId: "7EBCAWDLJC"
+#   apiKey: "2dc023567182bf05f8e2c085df2047aa"
+#   adminApiKey: "9d4e5a1950095e2f6ae06315c6219e9b"
+#   chunkSize: 5000
+#   indexName: "glassysky"
+#   fields:
+#     - content:strip:truncate,0,500
+#     - excerpt:strip
+#     - gallery
+#     - permalink
+#     - photos
+#     - slug
+#     - tags
+#     - title
+
+live2d:
+  enable: ture
+  scriptFrom: local
+  model: 
+  use: live2d-widget-model-haruto #模型选择
+  display: 
+  position: right  #模型位置
+  width: 150       #模型宽度
+  height: 300      #模型高度
+  mobile: 
+  show: false      #是否在手机端显示
+
+search:
+  path: search.xml
+  field: post
+  content: true
+
+aplayer:
+  meting: true
+  asset_inject: true
+  
+# hexo-admin authentification
+# admin:
+#   username: glassysky
+#   password_hash: $2a$10$tdAbXWR3lePVIca.OdYlV.fvjBnkzf4szjofEWsld1cOsPzisvXN.
+#   secret: glassysky
+#   deployCommand: 'deploy.bat'
+
+# hexo-hide-posts
+# 举个栗子：设置 filter: secret 之后，你就可以在 front-matter 中使用 secret: true 来隐藏文章了。
+hide_posts:
+  # 可以改成其他你喜欢的名字
+  filter: 'secret'
+  # 指定你想要传递隐藏文章的 generator，比如让所有隐藏文章在存档页面可见
+  # 常见的 generators 有：index, tag, category, archive, sitemap, feed, etc.
+  public_generators: []
+  # 为隐藏的文章添加 noindex meta 标签，阻止搜索引擎收录
+  noindex: true
+
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+# 设置百度主动推送
+baidu_url_submit:
+  count: 200  # 比如200，代表提交最新的200个链接
+  host: www.demo.com # 在百度站长平台中注册的域名
+  token: abcdefghijklnmo # 百度站长密钥
+  path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，这个默认
+
 ## Themes: https://hexo.io/themes/
-theme: butterfly
+theme: Butterfly
 
 # Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
+## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repository: git@github.com:lianziyan/lianziyan.github.io.git
   branch: master
+#   - type: baidu_url_submitter
+
+# plugins:
+#   - hexo-algoliasearch
+

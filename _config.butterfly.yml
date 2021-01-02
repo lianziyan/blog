@@ -1,3 +1,24 @@
+# offline config passed to sw-precache.
+offline:
+  maximumFileSizeToCacheInBytes: 10485760 # 緩存的最大文件大小，以字節為單位
+  staticFileGlobs:
+    - public/**/*.{js,html,css,png,jpg,gif,,jpeg,svg,webp,eot,ttf,woff,woff2,ico}
+
+# 靜態文件合集，如果你的站點使用了例如webp格式的文件，請將文件類型添加進去。
+  stripPrefix: public
+  verbose: true
+  runtimeCaching:
+    - urlPattern: /*
+      handler: cacheFirst
+      options:
+        origin: https://cdn.jsdelivr.net
+
+# CDNs - should be cacheFirst, since they should be used specific versions so should not change
+# - urlPattern: /* # 如果你需要加載CDN資源，請配置該選項，如果沒有，可以不配置。
+#  handler: cacheFirst
+#  options:
+#    origin: your_websie_url # 可替換成你的 url
+
 # Main menu navigation (導航目錄)
 # --------------------------------------
 
@@ -7,25 +28,28 @@
 #   name || link || icon
 
 menu:
-  首页: / || fas fa-home
-  时间轴: /archives/ || fas fa-archive
-  标签: /tags/ || fas fa-tags
-  分类: /categories/ || fas fa-folder-open
-  清单|| fa fa-heartbeat: 
-    -音乐|| /music/ || fas fa-music 
-    -照片|| /Gallery/ || fas fa-images 
-    -电影|| /movies/ || fas fa-video
-  友链: /link/ || fas fa-link
-  关于: /about/ || fas fa-heart
-
-
-# Hide the child menu items in mobile sidebar
-hide_sidebar_menu_child: false
+   主页: / || fas fa-home faa-bounce animated
+   百宝箱 || fas fa-leaf faa-bounce animated-hover:
+     - 摆着 || https://loli.place || fas fa-paw
+     - 同上 ||https://loli.place || fas fa-graduation-cap
+   找文章 || fas fa-book faa-bounce animated-hover:
+     - 时间轴 || /archives/ || fas fa-archive faa-bounce animated-hover
+     - 标签 || /tags/ ||fas fa-tags faa-bounce animated-hover
+     - 分类 || /categories/ || fas fa-folder-open faa-bounce animated-hover
+     - 说说 || /shuoshuo/ || fas fa-comment faa-bounce animated-hover
+   远方杂谈 || fas fa-list faa-spin animated:
+     - 音乐 || /music/ || fas fa-music faa-bounce animated-hover
+     - 相册 || /photo/ || fas fa-image faa-bounce animated-hover
+     - 电影 || /video/ || fas fa-video faa-bounce animated-hover
+   友情链接: /link/ || fas fa-link faa-flash animated
+   留言板: /bbs/ || fas fa-window-maximize
+   关于 || fas fa-heart faa-bounce animated-hover:
+     - 我的 || /about/ || fas fa-heart faa-bounce animated-hover
 
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: mac light # default / darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -36,15 +60,17 @@ code_word_wrap: false
 copy:
   enable: true
   copyright:
-    enable: false
+    enable: true
     limit_count: 50
 
 # social settings (社交圖標設置)
 # formal:
 #   icon: link || the description
 social:
-  # fab fa-github: https://github.com/xxxxx || Github
-  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email
+  iconfont icon-bilibili1: https://space.bilibili.com/312686863 || B站
+  fab fa-github: https://github.com/lianziyan || Github
+  fas fa-envelope:  loli@loli.place || Email
+  iconfont icon-RSS: /atom.xml || RSS
 
 # search (搜索)
 # --------------------------------------
@@ -56,16 +82,16 @@ algolia_search:
     per_page: 6
 
   labels:
-    input_placeholder: Search for Posts
-    hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
-    hits_stats: '${hits} results found in ${time} ms'
+    input_placeholder: 请输入搜索内容
+    hits_empty: "对不起，我没有找到关于: ${query}的内容" # if there are no result
+    hits_stats: '${hits} 发现结果在 ${time} ms'
 
 # Local search
 local_search:
   enable: false
   labels:
-    input_placeholder: Search for Posts
-    hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
+    input_placeholder: '请输入搜索内容'
+    hits_empty: "对不起，我没有找到关于: ${query}的内容" # if there are no result
 
 # Math (數學)
 # --------------------------------------
@@ -76,7 +102,7 @@ local_search:
 
 # MathJax
 mathjax:
-  enable: false
+  enable: true
   per_page: false
 
 # KaTeX
@@ -89,39 +115,32 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: /img/favicon.png
+favicon: /img/favicon.ico
 
 # Avatar (頭像)
 avatar:
   img: /img/avatar.png
-  effect: false
+  effect: true
 
-# The banner image of home page
-index_img: https://images.anime-pictures.net/8c9/8c9ba8e2ef5366020b33788a44fba41c.jpg?if=ANIME-PICTURES.NET_-_656819-1920x1080-virtual+youtuber-hololive-kagura+mea+channel-minato+aqua-kagura+mea-vinkyfre.jpg
+# the banner image of home page
+index_img: 
 
-# If the banner of page not setting, it will show the top_img
-default_top_img: https://images.anime-pictures.net/8c9/8c9ba8e2ef5366020b33788a44fba41c.jpg?if=ANIME-PICTURES.NET_-_656819-1920x1080-virtual+youtuber-hololive-kagura+mea+channel-minato+aqua-kagura+mea-vinkyfre.jpg
+# if the banner of page not setting, it will show the top_img
+default_top_img: 
+  
 
-# The banner image of archive page
-archive_img:
+# the banner image of archive page
+archive_img: /img/banner/4.jpg
 
-# If the banner of tag page not setting, it will show the top_img
+
+# the banner image of tag page
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img:
+tag_img:  /img/banner/4.jpg
 
-# The banner image of tag page
-# format: 
-#  - tag name: xxxxx
-tag_per_img:
-
-# If the banner of category page not setting, it will show the top_img
+# the banner image of category page
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img:
+category_img:  /img/banner/4.jpeg
 
-# The banner image of category page
-# format: 
-#  - category name: xxxxx
-category_per_img:
 
 # If you are using hexo-douban, you can configure it (如果你有使用 hexo-douban,可配置這個)
 # douban:
@@ -139,8 +158,7 @@ cover:
   # left/right/both
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
-  default_cover:
-    # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
+  default_cover: /img/banner/4.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -149,27 +167,25 @@ error_img:
 
 # A simple 404 page
 error_404:
-  enable: false
-  subtitle: 'Page Not Found'
+  enable: true
+  subtitle: '小伙伴走丢了( ๑ŏ ﹏ ŏ๑ )'
   background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
 
 post_meta:
   page: # Home Page
     date_type: created # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
-    date_format: date # date/relative 顯示日期還是相對日期
     categories: true # true or false 主頁是否顯示分類
     tags: false # true or false 主頁是否顯示標籤
     label: true # true or false 顯示描述性文字
   post:
     date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
-    date_format: date # date/relative 顯示日期還是相對日期
     categories: true # true or false 文章頁是否顯示分類
     tags: true # true or false 文章頁是否顯示標籤
     label: true # true or false 顯示描述性文字
 
 # wordcount (字數統計)
 wordcount:
-  enable: false
+  enable: true
   post_wordcount: true
   min2read: true
   total_wordcount: true
@@ -178,7 +194,6 @@ wordcount:
 # 1: description
 # 2: both (if the description exists, it will show description, or show the auto_excerpt)
 # 3: auto_excerpt (default)
-# false: do not show the article introduction
 index_post_content:
   method: 3
   length: 500 # if you set method to 2 or 3, the length need to config
@@ -200,14 +215,14 @@ post_copyright:
 
 # Sponsor/reward
 reward:
-  enable: false
+  enable: true
   QR_code:
-    # - img: /img/wechat.jpg
-    #   link:
-    #   text: wechat
-    # - img: /img/alipay.jpg
-    #   link:
-    #   text: alipay
+     - img: /img/wechat.png
+       link:
+       text: 微信
+     - img: /img/alipay.jpg
+       link:
+       text: 支付宝
 
 # Related Articles
 related_post:
@@ -216,17 +231,17 @@ related_post:
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
 
 # figcaption (圖片描述文字)
-photofigcaption: false
+photofigcaption: true
 
 # anchor
 # when you scroll in post, the URL will update according to header id.
-anchor: false
+anchor: true
 
 # Displays outdated notice for a post (文章過期提醒)
 noticeOutdate:
-  enable: false
+  enable: true
   style: flat # style: simple/flat
-  limit_day: 500 # When will it be shown
+  limit_day: 30 # When will it be shown
   position: top # position: top/bottom
   message_prev: It has been
   message_next: days since the last update, the content of the article may be outdated.
@@ -250,7 +265,14 @@ sharejs:
 # https://www.addtoany.com/
 addtoany:
   enable: false
-  item: facebook,twitter,wechat,sina_weibo,facebook_messenger,email,copy_link
+  item:
+    - facebook
+    - twitter
+    - wechat
+    - sina_weibo
+    - facebook_messenger
+    - email
+    - copy_link
 
 # Comments System
 # --------------------------------------
@@ -259,13 +281,13 @@ comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Utterances/Facebook Comments
   use:
-  # - Valine
-  # - Disqus
+   - Valinex
+   - Gitalk
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
-  count: false # Display comment count in top_img
+  lazyload: true
+  count: true # Display comment count in top_img
 
 # disqus
 # https://disqus.com/
@@ -292,33 +314,60 @@ livere:
 # gitalk
 # https://github.com/gitalk/gitalk
 gitalk:
-  client_id:
-  client_secret:
-  repo:
-  owner:
-  admin:
-  language: en # en, zh-CN, zh-TW, es-ES, fr, ru
+  client_id: 
+  client_secret: 
+  repo: 
+  owner: 
+  admin: 
+  language: zh-CN # en, zh-CN, zh-TW, es-ES, fr, ru
   perPage: 10 # Pagination size, with maximum 100.
   distractionFreeMode: false # Facebook-like distraction free mode.
   pagerDirection: last # Comment sorting direction, available values are last and first.
-  createIssueManually: false # Gitalk will create a corresponding github issue for your every single page automatically
+  createIssueManually: true # Gitalk will create a corresponding github issue for your every single page automatically
 
 # valine
 # https://valine.js.org
 valine:
-  appId: # leancloud application app id
-  appKey: # leancloud application app key
+  appId:  # leancloud application app id
+  appKey:  # leancloud application app key
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  lang: en # i18n: zh-CN/zh-TW/en/ja
-  placeholder: Please leave your footprints # valine comment input placeholder (like: Please leave your footprints)
+  lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
+  placeholder: 自古评论出人才 # valine comment input placeholder (like: Please leave your footprints)
   guest_info: nick,mail,link # valine comment header info (nick/mail/link)
-  recordIP: false # Record reviewer IP
+  recordIP: true # Record reviewer IP
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
-  bg: # valine background
-  emojiCDN: # emoji CDN
-  enableQQ: false # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
+  bg: /img/comment_bg.webp # valine background
+  emojiCDN: https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/ # emoji CDN
+  enableQQ: true # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
   requiredFields: nick,mail # required fields (nick/mail)
+
+# valinex是valine的魔改版
+valinex:
+  appId:  # leancloud application app id
+  appKey:  # leancloud application app key
+  master:
+    - 
+  friends:
+    - 
+  pageSize: 10 # comment list page size
+  avatar: monsterid # gravatar style https://valine.js.org/#/avatar
+  lang: zh-cn # i18n: zh-cn/en
+  placeholder: '📌昵称可以填写QQ号来自动补全QQ信息啦~\r👨‍🔧本站已启用Akismet反垃圾评论~\r🚀评论和回复支持M↓~' # valine comment input placeholder(like: Please leave your footprints )
+  guest_info: 昵称,邮箱,主页 #valine comment header info
+  recordIP: true # Record reviewer IP
+  serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
+  bg: https://cdn.jsdelivr.net/gh/HCLonely/hclonely.github.io@1.4.7/img/comment_bg.png # valine background
+  count: true # top_img顯示評論數,
+  emojiCDN: https://cdn.jsdelivr.net/gh/GamerNoTitle/ValineCDN@master/
+  enableQQ: true
+  requiredFields: nick,mail
+  metaPlaceholder:
+    nick: 昵称/QQ号(必填)
+    mail: 邮箱(必填)
+    link: 网址(https://)
+  tagMeta: '博主,小伙伴,访客' # 标签要显示的文字,默认'博主,小伙伴,访客'
+
 
 # utterances
 # https://utteranc.es/
@@ -344,10 +393,10 @@ facebook_comments:
 
 # Chat Button [recommend]
 # It will create a button in the bottom right corner of website, and hide the origin button
-chat_btn: false
+chat_btn: true
 
 # The origin chat button is displayed when scrolling up, and the button is hidden when scrolling down
-chat_hide_show: false
+chat_hide_show: true
 
 # chatra
 # https://chatra.io/
@@ -365,7 +414,7 @@ tidio:
 # http://daovoice.io/
 daovoice:
   enable: false
-  app_id:
+  app_id: 
 
 # gitter
 # https://gitter.im/
@@ -385,32 +434,25 @@ footer:
   owner:
     enable: true
     since: 2020
-  custom_text: 我相信所有美好的事物都会发生
+  custom_text: 远方有你伴余生
   copyright: true # Copyright of theme and framework
   ICP: # Chinese ICP License
     enable: false
     url:
-    text:
+    text: 黑23451
     icon: /img/icp.png
 
 # Analysis
 # --------------------------------------
 
 # Baidu Analytics
-# https://tongji.baidu.com/web/welcome/login
-baidu_analytics:
+baidu_analytics: d12ba6ac4453b987b20452504af8ed60
 
 # Google Analytics
-# https://analytics.google.com/analytics/web/
 google_analytics:
 
 # Tencent Analytics ID
-# https://mta.qq.com
 tencent_analytics:
-
-# CNZZ Analytics
-# https://www.umeng.com/
-cnzz_analytics:
 
 # Advertisement
 # --------------------------------------
@@ -442,11 +484,11 @@ bing_site_verification:
 
 # Baidu Webmaster tools verification setting
 # See: https://ziyuan.baidu.com/site/
-baidu_site_verification:
+baidu_site_verification: sygPO9Npbt
 
 # 360 Webmaster tools verification setting
 # see http://zhanzhang.so.com/
-qihu_site_verification:
+qihu_site_verification: 
 
 # Yandex Webmaster tools verification setting
 # see https://webmaster.yandex.com/
@@ -483,22 +525,55 @@ index_top_img_height:
 # The user interface setting of category and tag page (category和tag頁的UI設置)
 # index - same as Homepage UI (index 值代表 UI將與首頁的UI一樣)
 # default - same as archives UI 默認跟archives頁面UI一樣
-category_ui: # 留空或 index
+category_ui: index # 留空或 index
 tag_ui: # 留空或 index
 
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
+# The formal of color: '#49B202'
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background:
+# White color will be shown as default
+background: url('/img/banner/4.jpg')
 
-# Footer Background
+
+#  随机背景是否开启
+#  list: 图片组，从组内随机选择一张
+# ---------------------------
+RandomBackground:
+  enable: true # 是否随机
+  imglist: 
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/1.jpg # imglist:  '- /img/cover/bg' # 图片位置，支持http，https协议
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/2.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/3.png
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/4.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/5.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/6.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/7.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/8.png
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/9.png
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/10.png
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/11.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/12.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/13.png
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/14.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/15.png
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/16.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/17.webp
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/18.jpg  
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/19.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/20.jpg
+    - https://cdn.jsdelivr.net/gh/glassy-sky-lisong/StaticFile/img/21.png
+
+# Show the footer background image (same as top_img)
 footer_bg: false
+
+# 页脚--会飞的鱼
+flyfish: 
+  enable: true
+  path: /js/third-party/fish.js
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
-
-# Enter transitions (開啓網頁進入效果)
-enter_transitions: true
 
 # Background effects (背景特效)
 # --------------------------------------
@@ -513,8 +588,8 @@ canvas_ribbon:
   click_to_change: false
   mobile: false
 
-# Fluttering Ribbon (動態彩帶)
-canvas_fluttering_ribbon:
+# Dynamic ribbon (動態彩帶)
+canvas_ribbon_piao:
   enable: false
   mobile: false
 
@@ -531,70 +606,73 @@ canvas_nest:
 # Typewriter Effect (打字效果)
 # https://github.com/disjukr/activate-power-mode
 activate_power_mode:
-  enable: false
+  enable: true
   colorful: true # open particle animation (冒光特效)
-  shake: true #  open shake (抖動特效)
-  mobile: false
+  shake: false #  open shake (抖動特效)
 
 # Mouse click effects: fireworks (鼠標點擊效果: 煙火特效)
 fireworks:
-  enable: false
+  enable: true
   zIndex: 9999 # -1 or 9999
-  mobile: false
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
-click_heart:
-  enable: false
-  mobile: false
+click_heart: false
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
 ClickShowText:
   enable: false
   text:
-    # - I
-    # - LOVE
-    # - YOU
+    - 奥利给
+    - 今天又是充满希望的一天
+    - 大威天龙，我让你原形毕露
   fontSize: 15px
-  mobile: false
 
 # Default display mode (網站默認的顯示模式)
 # light (default) / dark
 display_mode: light
 
+# 建议下雪特效和星星特效不要同时使用
+# 下雪特效
+snowjs: 
+  enable: false
+  path: /js/third-party/snow.js
+
+# 鼠标滑过出现星星特效
+starjs:
+  enable: true
+
 # Beautify (美化頁面顯示)
 beautify:
-  enable: false
+  enable: true
   field: post # site/post
-  title-prefix-icon: '\f0c1'
+  title-prefix-icon: '\f0e7'
   title-prefix-icon-color: '#F47466'
 
 # Global font settings
 # Don't modify the following settings unless you know how they work (非必要不要修改)
 font:
-  global-font-size:
-  code-font-size:
-  font-family:
-  code-font-family:
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Lato, Roboto, "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif
+  code-font: consolas, Menlo, "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif
 
 # Font settings for the site title and site subtitle
 # 左上角網站名字 主頁居中網站名字
-# blog_title_font:
-  # font_link: https://fonts.googleapis.com/css?family=Titillium+Web&display=swap
-  # font-family: Titillium Web, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif
+blog_title_font:
+  font_link: # https://fonts.googleapis.com/css?family=Titillium+Web&display=swap
+  font-family: Titillium Web, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif
 
 # The setting of divider icon (水平分隔線圖標設置)
 hr_icon:
   enable: true
-  icon: # the unicode value of Font Awesome icon, such as '\3423'
-  icon-top:
+  icon: '\f21c' # the unicode value of Font Awesome icon, such as '\3423'
+  icon-top: -20px 
 
 # the subtitle on homepage (主頁subtitle)
 subtitle:
-  enable: false
+  enable: true
   # Typewriter Effect (打字效果)
   effect: true
   # loop (循環打字)
-  loop: true
+  loop: false
   # source調用第三方服務
   # source: false 關閉調用
   # source: 1  調用搏天api的隨機語錄（簡體） https://api.btstu.cn/
@@ -602,15 +680,17 @@ subtitle:
   # source: 3  調用一句網（簡體） http://yijuzhan.com/
   # source: 4  調用今日詩詞（簡體） https://www.jinrishici.com/
   # subtitle 會先顯示 source , 再顯示 sub 的內容
-  source: false
+  source: 1
   # 如果有英文逗號' , ',請使用轉義字元 &#44;
   # 如果有英文雙引號' " ',請使用轉義字元 &quot;
   # 開頭不允許轉義字元，如需要，請把整個句子用雙引號包住
   # 如果關閉打字效果，subtitle只會顯示sub的第一行文字
-  sub:
+  sub: 
+    - 今日事&#44;今日畢
+    - Never put off till tomorrow what you can do today
 
 # Loading Animation (加載動畫)
-preloader: false
+preloader: true
 
 # aside (側邊欄)
 # --------------------------------------
@@ -618,17 +698,17 @@ preloader: false
 aside:
   enable: true
   mobile: true # display on mobile
-  position: right # left or right
+  position: left # left or right
   card_author:
     enable: true
-    description:
+    description: '霞消云蒸，清辉洋溢'
     button:
       icon: fab fa-github
-      text: Follow Me
-      link: https://github.com/xxxxxx
+      text: 关注一下
+      link: https://github.com/glassy-sky-lisong
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: 欢迎你，今天又是元气慢慢呢！<img src="https://cdn.jsdelivr.net/gh/lete114/CDN/Use/my_bg.gif">
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
@@ -636,7 +716,7 @@ aside:
   card_categories:
     enable: true
     limit: 8 # if set 0 will show all
-    expand: none # none/true/false
+    expand: false # none/true/false 
   card_tags:
     enable: true
     limit: 40 # if set 0 will show all
@@ -647,10 +727,17 @@ aside:
     format: MMMM YYYY # eg: YYYY年MM月
     order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
     limit: 8 # if set 0 will show all
-  card_webinfo:
+  card_webinfo: true
+  card_weather:
     enable: true
-    post_count: true
-    last_push_date: true
+  card_calendar: 
+    enable: true
+  card_aplayer:
+    enable: true
+    id: 5201307931  # 621465725
+    server: netease
+    type: playlist
+    order: random # player play order, values: 'list', 'random'
 
 # busuanzi count for PV / UV in site
 # 訪問人數
@@ -662,36 +749,17 @@ busuanzi:
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
-  enable: false
-  publish_date:
-
-# Aside widget - Newest Comments
-newest_comments:
-  enable: false
-  limit: 6
-  avatar: true
-  leancloud:
-    enable: false
-    appId: # leancloud application app id
-    appKey: # leancloud application app key
-    serverURL: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
-    default_avatar: # mp/identicon/monsterid/wavatar/retro/robohash/blank
-  github_issues:
-    enable: false
-    repo:
-  disqus:
-    enable: false
-    forum:
-    api_key:
+  enable: true
+  publish_date: 2020/7/7
 
 # Bottom right button (右下角按鈕)
 # --------------------------------------
 
 # Conversion between Traditional and Simplified Chinese (簡繁轉換)
 translate:
-  enable: false
+  enable: true
   # The text of a button
-  default: 繁
+  default: 简
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
   defaultEncoding: 2
   # Time delay
@@ -713,7 +781,7 @@ darkmode:
   # autoChangeMode: 1  Following System Settings, if the system doesn't support dark mode, it will switch dark mode between 6 pm to 6 am
   # autoChangeMode: 2  Switch dark mode between 6 pm to 6 am
   # autoChangeMode: false
-  autoChangeMode: false
+  autoChangeMode: 1
 
 # Lightbox (圖片大圖查看模式)
 # --------------------------------------
@@ -754,55 +822,44 @@ note:
 # other
 # --------------------------------------
 
-# Artitalk
-# see https://artitalk.js.org/
-artitalk:
-  appId:
-  appKey:
-  option:
-
 # Pjax [Beta]
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
-pjax:
-  enable: false
-  exclude:
-    # - xxxx
-    # - xxxx
+pjax: true
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
-  enable: false
-  per_page: true
+  enable: true
+  per_page: false
 
 # Snackbar (Toast Notification 彈窗)
 # https://github.com/polonel/SnackBar
 # position 彈窗位置
 # 可選 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
-  enable: false
-  position: bottom-left
+  enable: true
+  position: top-center
   bg_light: '#49b1f5' # The background color of Toast Notification in light mode
   bg_dark: '#121212' # The background color of Toast Notification in dark mode
 
 # Baidu Push (百度推送)
-baidu_push: false
+baidu_push: true
 
 # https://instant.page/
 # prefetch (預加載)
-instantpage: false
+instantpage: true
 
 # https://github.com/vinta/pangu.js
 # Insert a space between Chinese character and English character (中英文之間添加空格)
 pangu:
-  enable: false
+  enable: true
   field: site # site/post
 
 # Lazyload (圖片懶加載)
 # https://github.com/verlok/lazyload
 lazyload:
-  enable: false
-  post: /img/loading.gif
+  enable: true
+  post: /img/loading1.gif
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
@@ -810,6 +867,7 @@ lazyload:
 # pwa:
 #   enable: false
 #   manifest: /image/pwa/manifest.json
+#   theme_color: "#fff"
 #   apple_touch_icon: /image/pwa/apple-touch-icon.png
 #   favicon_32_32: /image/pwa/32.png
 #   favicon_16_16: /image/pwa/16.png
@@ -830,11 +888,18 @@ fragment_cache: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-  # - <link rel="stylesheet" href="/xxx.css"> 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-    <script src="/live2d-widget/autoload.js"></script>
+  # - <link rel="stylesheet" href="/xxx.css">
+    - <link rel="stylesheet" href="/css/VolantisTags.css">
+    - <link rel="stylesheet" href="/css/volantis.css">
+    - <link rel="stylesheet" href="/css/fontAnimation.css">
+    - <link rel="stylesheet" href="/css/cur.css">
+    - <link rel="stylesheet" href="/css/iconfont.css">
+    
   bottom:
     # - <script src="xxxx"></script>
+    - <script src="/js/VolantisTags.js"></script>
+    - <script src="/js/volantis.js"></script>
+    
 
 # CDN
 # Don't modify the following settings unless you know how they work
@@ -852,6 +917,7 @@ CDN:
   # comments
   gitalk: https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js
   gitalk_css: https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css
+  valinex: https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js 
   valine: https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js
   disqusjs: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js
   disqusjs_css: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css
@@ -879,9 +945,9 @@ CDN:
   busuanzi: //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
 
   # background effect
-  canvas_ribbon: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js
-  canvas_fluttering_ribbon: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js
-  canvas_nest: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js
+  canvas_ribbon: /js/third-party/canvas-ribbon.js
+  canvas_ribbon_piao: /js/third-party/piao.js
+  canvas_nest: /js/third-party/canvas-nest.js
 
   lazyload: https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js
   instantpage: https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js
@@ -898,10 +964,11 @@ CDN:
   snackbar: https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js
 
   # effect
-  activate_power_mode: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js
-  fireworks: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js
-  click_heart: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js
-  ClickShowText: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js
+  anime: https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js
+  activate_power_mode: /js/third-party/activate-power-mode.js
+  fireworks: /js/third-party/fireworks.js
+  click_heart: /js/third-party/click_heart.js
+  ClickShowText: /js/third-party/ClickShowText.js
 
   # fontawesome
   fontawesome: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css
@@ -916,14 +983,4 @@ CDN:
   # aplayer
   aplayer_css: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css
   aplayer_js: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js
-  meting_js: https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js
-
-  # Prism.js
-  prismjs_js: https://cdn.jsdelivr.net/npm/prismjs/prism.min.js
-  prismjs_lineNumber_js: https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js
-  prismjs_autoloader: https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js
-
-  artitalk: https://cdn.jsdelivr.net/npm/artitalk
-  
-  live2d:
-  enable: true
+  meting_js: https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js

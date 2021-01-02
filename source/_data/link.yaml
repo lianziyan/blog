@@ -1,0 +1,60 @@
+  - class_name: class名
+    descr: 小字描述支持html标签
+    link_list:
+      - name: loli空间
+        link: https://loli.place
+        avatar: https://cdn.jsdelivr.net/gh/picgo/picgo/bt-sonny.jpg
+        descr: 更多效果自行搭配
+        # 边框大小 默认为0 
+        width: 0px
+        # 边框样式 默认 solid
+        style: solid
+        # 边框颜色 默认淡蓝色 #49b1f5
+        color: "#0078e7"
+        # 自动旋转 可选值 flash（闪现） link_custom（单色呼吸灯） link_custom1（彩色呼吸灯）
+        custom: link_custom1
+        # 动画时长设定，默认为0
+        time: 4s
+        # name的颜色
+        namecolor: "#ff9191"
+        # descr的颜色
+        descolor: "#ff9191"
+        # 背景颜色
+        background: 0
+        # 鼠标悬停旋转角度
+        rotate: 360deg
+        # 自动旋转 latuo左旋转 rauto右旋转
+        autorotate: "lauto"
+        # 旋转的周期（时长）
+        autotime: 2s
+        #移除此链接的权重 0为否 非0为移除
+        remove: 0
+
+      - name: 初辰博客
+        link: https://chuchendjs.github.io
+        avatar: https://cdn.jsdelivr.net/gh/picgo/picgo/bt-sonny.jpg
+        descr: 更多效果自行搭配
+        # 边框大小 默认为0 
+        width: 0px
+        # 边框样式 默认 solid
+        style: solid # dashed
+        # 边框颜色 默认淡蓝色 #49b1f5  #D2691E #9fefaf #ff9999 #77d3dc #77d3dc
+        color: "#0078e7"
+        # 自动旋转 可选值 flash（闪现） link_custom（单色呼吸灯） link_custom1（彩色呼吸灯）
+        custom: link_custom
+        # 动画时长设定，默认为0
+        time: 4s
+        # name的颜色
+        namecolor: "#ff9191"
+        # descr的颜色
+        descolor: "#ff9191"
+        # 背景颜色
+        background: 0
+        # 鼠标悬停旋转角度
+        rotate: 360deg
+        # 自动旋转 latuo左旋转 rauto右旋转
+        autorotate: "lauto"
+        # 旋转的周期（时长）
+        autotime: 2s
+        #移除此链接的权重 0为否 非0为移除
+        remove: 0
