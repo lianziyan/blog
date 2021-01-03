@@ -166,7 +166,7 @@ baidusitemap:
 # 设置百度主动推送
 baidu_url_submit:
   count: 200  # 比如200，代表提交最新的200个链接
-  host: www.demo.com # 在百度站长平台中注册的域名
+  host: www.maazs.com # 在百度站长平台中注册的域名
   token: abcdefghijklnmo # 百度站长密钥
   path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，这个默认
 
